@@ -44,6 +44,43 @@ REQUISICAO|STRING| CODIGO COMPLETA DA REQUISIÇÃO
 HTTP_CODE|NUMBER| CODIGO DE RESPOSTA HTTP ([Para saber mais])(https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 TOTAL_BYTES|NUMBER|TOTAL DE BYTES
 
+>Abaixo consta o codigo python utilizado
+
+```python
+import pyspark
+from pyspark.sql.types import *
+from pyspark.sql import SparkSession
+import re
+from pyspark.sql.functions import UserDefinedFunction
+
+spark = SparkSession.builder.appName('Nasa').getOrCreate()
+
+# Gera estrura dataframe
+df_jul95_struture = [StructField("HOSTNAME",StringType(), True),\
+            StructField("TIMESTAMP", StringType(), True),\
+            StructField("REQUISICAO", StringType(), True),\
+            StructField("HTTP_CODE", StringType(), True),\
+            StructField("TOTAL_BYTES", StringType(), True)]
+jul_95schema = StructType(df_jul95_struture)
+df_jul95_s = spark.createDataFrame([],jul_95schema)
+
+#df_jul95_s.show()
+
+# Gera dataframe from FILE ASCII
+df_jul95 = spark.read.csv("/spark/nasafiles/NASA_access_log_Jul95")
+
+# Replace dataframe caracter - passo 1
+udf = UserDefinedFunction(lambda x: re.sub(' - - ','|',x), StringType())
+new_df = df_jul95.select(*[udf(column).alias(column) for column in df_jul95.columns])
+new_df.collect()
+new_df.write.csv('/home/nasa_jul95.txt')
+new_df.show()
+
+#df.repartition(1).write.format(new_df).save("nasa_jul95.csv",header = 'false')
+# Replace datafram - passo2
+#df_jul95_p1 = 
+```
+
 g1) Número de hosts únicos?
 
 g2) Total de erros 404
