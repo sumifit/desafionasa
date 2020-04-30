@@ -33,8 +33,7 @@ val counts = textFile.flatMap(line => line.split(" "))
 counts.saveAsTextFile("hdfs://...")
 ```
 
-```val textFile = sc.textFile("hdfs://...")```==> Lê um determinado conteúdo em um diretório do HDFS
-```val counts = textFile.flatMap(line => line.split(" "))``` ==>
+>R: Lê um determinado conteúdo em um diretório do HDFS, 
 
 g) Código elaborado em uma linguagem (***Python*** ou ***Scala***) utilizando ***Spark*** e responder as questões abaixo:
 
