@@ -5,15 +5,15 @@ Abaixo consta as perguntas que foram feita no arquivo PDF
 
 a) Qual é o objetivo do comando ***cache*** em ***Spark***?
 
->R: Utiliza-se cache no ***Spark*** para efetuar análise sem precisar transformar novamente o arquivo original em cada leitura. Essa transformação cria um ***Spark RDD*** resultante bem menor que o o arquivo original facilictando assim as manipulações e ganhando velocidade
+>R: Utiliza-se cache no ***Spark*** para efetuar análise sem precisar transformar novamente o arquivo original em cada leitura. Essa transformação cria um ***Spark RDD*** resultante bem menor que o o arquivo original facilitando assim as manipulações e ganhando velocidade
 
 b) O mesmo código implementado em ***Spark*** é normalmente mais rápido que a implementação equivalente em MapReduce. Por quê?
 
-> Spark processa o código em memoria e o Mapreduce faz a leitura do código no cluster, processa e retorna o dado para o cluster. Isso o torna mais lento que o Spark
+> Spark processa o código em memóri, já o Mapreduce faz a leitura do código no cluster, processa e retorna o dado para o cluster. Isso o torna mais lento que o Spark
 
 c) Qual é a função do ***SparkContext***?
 
-> É o objeto que conecta o Spark ao programa que está sendo desenvolvido. Ele pode ser acessado como uma variável em um programa que para utilizar os seus recursos.
+> É o objeto que conecta o Spark ao programa que está sendo desenvolvido. Ele pode ser acessado como uma variável em um programa para utilizar os seus recursos.
 
 d) Explique com suas palavras o que é ***Resilient Distributed Datasets*** (RDD).
 
@@ -32,6 +32,9 @@ val counts = textFile.flatMap(line => line.split(" "))
           .reduceByKey(_ + _)
 counts.saveAsTextFile("hdfs://...")
 ```
+
+```val textFile = sc.textFile("hdfs://...")```==> Lê um determinado conteúdo em um diretório do HDFS
+```val counts = textFile.flatMap(line => line.split(" "))``` ==>
 
 g) Código elaborado em uma linguagem (***Python*** ou ***Scala***) utilizando ***Spark*** e responder as questões abaixo:
 
