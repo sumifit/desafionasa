@@ -5,13 +5,23 @@ Abaixo consta as perguntas que foram feita no arquivo PDF
 
 a) Qual é o objetivo do comando ***cache*** em ***Spark***?
 
+>R: Utiliza-se cache no ***Spark*** para efetuar análise sem precisar transformar novamente o arquivo original em cada leitura. Essa transformação cria um ***Spark RDD*** resultante bem menor que o o arquivo original facilictando assim as manipulações e ganhando velocidade
+
 b) O mesmo código implementado em ***Spark*** é normalmente mais rápido que a implementação equivalente em MapReduce. Por quê?
+
+> Spark processa o código em memoria e o Mapreduce faz a leitura do código no cluster, processa e retorna o dado para o cluster. Isso o torna mais lento que o Spark
 
 c) Qual é a função do ***SparkContext***?
 
+> É o objeto que conecta o Spark ao programa que está sendo desenvolvido. Ele pode ser acessado como uma variável em um programa que para utilizar os seus recursos.
+
 d) Explique com suas palavras o que é ***Resilient Distributed Datasets*** (RDD).
 
+>R: RDD é uma estrutura de dados utilizada pelo Spark que contém conjuntos de dados e que são divididos em partições lógicas. RDD tem como objetivo a manipulação de dados e é a representação de um dado distribuido nos nós do cluster e que pode ser processado em paralelo.
+
 e) ***GroupByKey*** é menos eficiente que ***reduceByKey*** em grandes dataset. Por quê?
+
+>GroupByKey tem uma desvantagem justamente por ele transferir todo o Dataset pela rede, enquanto o o reduceByKey calcula somas locais para cada chave em cada partição e combina essas somas locais em somas maiores.
 
 f) Explique o que o código ***Scala*** abaixo faz:
 
@@ -83,10 +93,34 @@ new_df.show()
 
 g1) Número de hosts únicos?
 
+TIPO|TOTAL
+---|---
+HOST UNICOS|0
+
 g2) Total de erros 404
+
+TIPO|TOTAL
+---|---
+ERRO 404|0
 
 g3) Os 5 URLs que mais causaram erro 404
 
+TIPO|TOTAL
+---|---
+URL 404|0
+URL 404|0
+URL 404|0
+URL 404|0
+URL 404|0
+
 g4) Quantidade de erros 404 por dia
 
+TIPO|TOTAL
+---|---
+URL 404 POR DIA|0
+
 g5) O total de bytes retornados
+
+TIPO|TOTAL
+---|---
+TOTAL BYTES|0
