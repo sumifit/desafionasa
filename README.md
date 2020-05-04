@@ -110,9 +110,7 @@ g3) Os 5 URLs que mais causaram erro 404
 
 g4) Quantidade de erros 404 por dia
 
-TIPO|TOTAL
----|---
-URL 404 POR DIA|0
+![Quantidade erro 404 por dia](https://github.com/sumifit/desafionasa/blob/master/4-QuantidadeErros404PorDia.PNG)
 
 g5) O total de bytes retornados
 
