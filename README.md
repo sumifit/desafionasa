@@ -103,13 +103,7 @@ g2) Total de erros 404
 
 g3) Os 5 URLs que mais causaram erro 404
 
-TIPO|TOTAL
----|---
-URL 404|0
-URL 404|0
-URL 404|0
-URL 404|0
-URL 404|0
+![5 URL mais erro 404](https://github.com/sumifit/desafionasa/blob/master/3-As5URLs_mais_erro_404.PNG)
 
 g4) Quantidade de erros 404 por dia
 
