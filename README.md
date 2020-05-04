@@ -99,9 +99,7 @@ g1) Número de hosts únicos?
 
 g2) Total de erros 404
 
-TIPO|TOTAL
----|---
-ERRO 404|0
+![Total erro 404](https://github.com/sumifit/desafionasa/blob/master/2-total_erros_404.PNG)
 
 g3) Os 5 URLs que mais causaram erro 404
 
