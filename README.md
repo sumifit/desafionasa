@@ -119,6 +119,4 @@ URL 404 POR DIA|0
 
 g5) O total de bytes retornados
 
-TIPO|TOTAL
----|---
-TOTAL BYTES|0
+![Total bytes](https://github.com/sumifit/desafionasa/blob/master/5-Total_bytes_retornados.PNG)
