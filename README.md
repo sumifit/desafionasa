@@ -59,38 +59,41 @@ TOTAL_BYTES|NUMBER|TOTAL DE BYTES
 >Abaixo consta o codigo python utilizado
 
 ```python
-import pyspark
-from pyspark.sql.types import *
+import pyspark.sql.functions as f
+from pyspark.sql.functions import year,month, dayofmonth
+from functools import reduce
 from pyspark.sql import SparkSession
-import re
-from pyspark.sql.functions import UserDefinedFunction
 
 spark = SparkSession.builder.appName('Nasa').getOrCreate()
 
-# Gera estrura dataframe
-df_jul95_struture = [StructField("HOSTNAME",StringType(), True),\
-            StructField("TIMESTAMP", StringType(), True),\
-            StructField("REQUISICAO", StringType(), True),\
-            StructField("HTTP_CODE", StringType(), True),\
-            StructField("TOTAL_BYTES", StringType(), True)]
-jul_95schema = StructType(df_jul95_struture)
-df_jul95_s = spark.createDataFrame([],jul_95schema)
+df_jul95 = spark.read.text("/spark/nasafiles/NASA_access_log_Jul95")
+df_aug95 = spark.read.text("/spark/nasafiles/NASA_access_log_Aug95")
+result = df_jul95.union(df_aug95)
 
-#df_jul95_s.show()
+split_df = result.select(f.regexp_extract('value', r'^([^\s]+\s)', 1).alias('host'),
+                          f.regexp_extract('value', r'^.*\[(\d\d/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} -\d{4})]', 1).alias('timestamp'),
+                          f.regexp_extract('value', r'^.*"\w+\s+([^\s]+)\s+HTTP.*"', 1).alias('path'),
+                          f.regexp_extract('value', r'^.*"\s+([^\s]+)', 1).cast('integer').alias('status'),
+                          f.regexp_extract('value', r'^.*\s+(\d+)$', 1).cast('integer').alias('content_size')
+                          )
 
-# Gera dataframe from FILE ASCII
-df_jul95 = spark.read.csv("/spark/nasafiles/NASA_access_log_Jul95")
+# 1)numero hosts unicos
+dfhostsunicos=split_df.groupBy("host").count().orderBy('count', ascending=False).show(truncate=False)                        
 
-# Replace dataframe caracter - passo 1
-udf = UserDefinedFunction(lambda x: re.sub(' - - ','|',x), StringType())
-new_df = df_jul95.select(*[udf(column).alias(column) for column in df_jul95.columns])
-new_df.collect()
-new_df.write.csv('/home/nasa_jul95.txt')
-new_df.show()
+# 2)total erros 404
+df404total=split_df.groupBy("status").count().where("status = 404").show()
 
-#df.repartition(1).write.format(new_df).save("nasa_jul95.csv",header = 'false')
-# Replace datafram - passo2
-#df_jul95_p1 = 
+# 3) 5 urls que mais causaram erro 404
+df404_top5=split_df.where("status = 404").groupBy('host').count().orderBy('count', ascending=False).show(n=5)
+
+# 4) Quantidade de erros 404 por dia
+
+split_df_distinct = split_df.select(split_df.host, split_df.timestamp).distinct().where("status = 404") # Cria um dataset de timestamp com distinct
+df_erros_dia_404 = split_df_distinct.groupBy('timestamp').count()
+df_erros_dia_404.orderBy('count', ascending=False).show()
+
+# 5) Quantidade total de bytes retornados
+dfbytes=split_df.groupBy("content_size").sum().show()
 ```
 
 g1) Número de hosts únicos?
