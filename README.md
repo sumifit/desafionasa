@@ -120,6 +120,8 @@ g4) Quantidade de erros 404 por dia
 
 ![Quantidade erro 404 por dia](https://github.com/sumifit/desafionasa/blob/master/4-QuantidadeErros404PorDia.PNG)
 
+> Não consegui usar o ```dayofmonth ``` do pyspark para pegar somente o dia, infelizmente! :(
+
 g5) O total de bytes retornados
 
 ![Total bytes](https://github.com/sumifit/desafionasa/blob/master/5-Total_bytes_retornados.PNG)
