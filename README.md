@@ -33,7 +33,7 @@ val counts = textFile.flatMap(line => line.split(" "))
 counts.saveAsTextFile("hdfs://...")
 ```
 
->R: Lê um determinado conteúdo em um diretório do HDFS, 
+>R: Lê um determinado conteúdo em um diretório do HDFS, faz um split de coluna onde o delimitador é ESPAÇO, conta cada palavra, faz um group by com a função reduceByKey e depois salva o resultado em um novo dataset no HADOOP (HDFS).
 
 g) Código elaborado em uma linguagem (***Python*** ou ***Scala***) utilizando ***Spark*** e responder as questões abaixo:
 
