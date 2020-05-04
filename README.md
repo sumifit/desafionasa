@@ -1,7 +1,7 @@
 ![Desafio Nasa](https://vdmedia.elpais.com/elpaistop/201810/27/2018102792523258_1540625246_video_1540625166.jpg)
 # ***Desafio Nasa***
 
-Abaixo consta as perguntas que foram feita no arquivo PDF
+Abaixo consta as perguntas que foram feita no arquivo ![PDF](https://github.com/sumifit/desafionasa/blob/master/Desafio_NASA.pdf)
 
 a) Qual é o objetivo do comando ***cache*** em ***Spark***?
 
