@@ -95,9 +95,7 @@ new_df.show()
 
 g1) Número de hosts únicos?
 
-TIPO|TOTAL
----|---
-HOST UNICOS|0
+![Host Unicos](https://github.com/sumifit/desafionasa/blob/master/1-Hostunicos.PNG)
 
 g2) Total de erros 404
 
